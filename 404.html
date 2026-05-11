@@ -31,19 +31,25 @@
       var pathSegmentsToKeep = 0;
 
       var l = window.location;
-      var routePath = l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/');
-      if (routePath === '') {
-        routePath = '/';
-      }
-      var search = l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '';
+      
+      // Prevent infinite redirect loops - only redirect if not already redirected
+      if (l.search.includes('?/')) {
+        // Already redirected, don't do it again
+      } else {
+        var routePath = l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/');
+        if (routePath === '') {
+          routePath = '/';
+        }
+        var search = l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '';
 
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        routePath.replace(/&/g, '~and~') +
-        search +
-        l.hash
-      );
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+          routePath.replace(/&/g, '~and~') +
+          search +
+          l.hash
+        );
+      }
     </script>
   </head>
   <body>
