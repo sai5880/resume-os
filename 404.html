@@ -2,10 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ResumeOS — Your AI Career Operating System</title>
-    <meta name="description" content="Local-first AI resume builder. WebGPU inference, ATS-optimized text-layer PDFs. Your resume never leaves your device." />
+    <title>ResumeOS — Redirecting</title>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // MIT License
@@ -29,20 +28,25 @@
       // https://username.github.io/repository-name/
       // with a base href of /repository-name/
 
-      var pathSegmentsToKeep = 0;
+      var pathSegmentsToKeep = 1;
 
       var l = window.location;
+      var routePath = l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/');
+      if (routePath === '') {
+        routePath = '/';
+      }
+      var search = l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '';
+
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
         l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        routePath.replace(/&/g, '~and~') +
+        search +
         l.hash
       );
     </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <p>Redirecting to ResumeOS...</p>
   </body>
 </html>
